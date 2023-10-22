@@ -4,8 +4,22 @@ export default defineNuxtConfig({
     ssr: false, // default behavior
     typescript: { shim: false },
 	devtools: { enabled: false },
-	modules: ['@nuxtjs/tailwindcss'],
+	modules: [
+        '@pinia/nuxt',
+        '@pinia-plugin-persistedstate/nuxt',
+        '@nuxt/ui'
+    ],
+    pinia: {},
+    colorMode: {
+        preference: 'light'
+    },
+    
+    piniaPersistedstate: {
+		storage: 'localStorage',
+		debug: true,
+	},
     css: ['~/assets/css/main.scss'],
+    imports: { dirs: ['stores'] },
     devServer: {
 		port: 5555,
 	},
