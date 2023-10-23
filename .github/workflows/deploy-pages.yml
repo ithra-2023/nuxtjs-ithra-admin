@@ -50,6 +50,7 @@ jobs:
       - run: pnpm  build
         env:
           NITRO_PRESET: github_pages
+          NODE_ENV: production
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
