@@ -1,4 +1,10 @@
 <script lang="ts" setup>
+    import * as alasql from 'alasql';
+    
+    alasql["private"].externalxlsxlib = require('xlsx');
+
+
+
 	const { signOut } = useAuth();
 
 	const { user } = useUserStore();
