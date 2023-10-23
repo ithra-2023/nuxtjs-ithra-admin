@@ -1,13 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { isProduction } from '~/utils/helpers'
-
 export default defineNuxtConfig({
 	pages: true,
 	ssr: false, // default behavior
 	typescript: { shim: false },
 	devtools: { enabled: false },
     app:{
-        baseURL: isProduction ? 'https://ithra-2023.github.io/nuxtjs-ithra-admin/' : '/',
+        baseURL: '/nuxtjs-ithra-admin/',
         buildAssetsDir: 'assets',
     },
 	modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@nuxt/ui'],
