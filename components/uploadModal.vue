@@ -20,7 +20,6 @@ import { sleep } from '~/utils/helpers';
     }
 
     function selectedFile(event: any) {
-        console.log(event.target.files[0]);
         file.value = event.target.files[0];
     }
 

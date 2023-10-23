@@ -8,7 +8,6 @@ export const convertToDate = (dateString: string): Timestamp =>{
 }
 
 export const useExcel = () => {
-
     //should export two functions, downloadExcel, and uploadExcel
     const downloadExcel = async (events: IEvent[]) => {
         const aoa = events.map((event: IEvent) => [
@@ -37,7 +36,6 @@ export const useExcel = () => {
     }
     
     const uploadExcel = async (file: any) => { 
-        console.log('uploadExcel', file)  
         const data = await file.arrayBuffer();
         /* data is an ArrayBuffer */
         const workbook = XLSX.read(data);
@@ -70,7 +68,6 @@ export const useExcel = () => {
         
         const expectedHeaders = Object.keys(dummyEvent);
 
-        
         // Validate headers
         const headers = XLSX.utils.sheet_to_json(worksheet, { header: 1 })[0] as string[];
 
@@ -86,34 +83,25 @@ export const useExcel = () => {
         }
 
         try {
-
-
             // Read data into IEvent array
             const events: IEvent[] = XLSX.utils.sheet_to_json(worksheet) as IEvent[];
-
-            console.log(events);
 
             // update the first event only in the stores/event.ts store using the updateEvent(id, event) method
             const { addEvent, updateEvent } = useEventsStore();
 
             // loop through all and apply the same logic
             for(const item of events) {
-                console.log(item)
                 console.log('stores/events.ts', '📪 Updating event in firebase and store', item.id);
                 const event_id = item.id as string;
                 item.start_date = convertToDate(item.start_date.toString());
                 item.end_date = convertToDate(item.end_date.toString());
                 item.language = (item.language as string).split(',');
-                delete item.id;
-                console.log('before awaiting')
-                
+                delete item.id;                
                 if(event_id !== '') await updateEvent(item, event_id);
                 else await addEvent(item);
 
                 console.log('stores/events.ts', event_id, '📪 Event updated in firebase and store');
             };
-
-
         } catch (error) {
             console.error('stores/events.ts', '📪 Error updating event in firebase and store', error);
         }
