@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { getDistance } from '@/utils/helpers';
-import { useDeleteEvent } from '~/composables/useEvents';
+import { useDeleteEvent, updateEventInFirestore } from '~/composables/useEvents';
 
 export const useEventsStore = defineStore('EVENTS_STORE', {
 	state: () => ({
@@ -10,12 +10,9 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 	}),
 
 	actions: {
-		addEvent(event: IEvent) {
-			if (this.events) {
-				this.events.push(event);
-			} else {
-				this.events = [event];
-			}
+		async addEvent(event: IEvent) {
+            await updateEventInFirestore(event);
+            await this.refreshEvents();
 		},
 
 		removeEvent(id: string) {
@@ -24,7 +21,8 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			}
 		},
 
-        async deleteEvent(id: string): Promise<void> {
+        async deleteEvent(id: string | undefined): Promise<void> {
+            if (!id) return;
             try {
                 console.log('stores/events.ts', '📪 Deleting event from firebase');
 
@@ -96,10 +94,16 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			};
 		},
 
-		updateEvent(id: string, event: IEvent) {
+		async updateEvent(event: IEvent, id: string) {
 			if (this.events) {
-				const index = this.events.findIndex((event: IEvent) => event.id === id);
+                const index = this.events.findIndex((event: IEvent) => event.id === id);
 				this.events[index] = event;
+                try {
+                    await updateEventInFirestore(event, id);
+                    console.log(`Event with ID ${id} updated successfully in Firestore.`);
+                } catch (error) {
+                    console.error(`Error updating event with ID ${id}: `, error);
+                }
 			}
 		},
 

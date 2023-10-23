@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, setDoc, updateDoc, arrayUnion, getDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore';
 import type { IGetEvents } from '@/types';
 
 export const getEvents = async (): Promise<IGetEvents> => {
@@ -102,3 +102,25 @@ export const useDeleteEvent = async (id: string): Promise<boolean> => {
         return false;
     }
 }
+
+export const updateEventInFirestore = async (event: IEvent, id?: string, ): Promise<boolean> => {
+    const { firestore } = useFirestore();
+
+    try {
+        if(id && id !== '') {
+            const eventRef = doc(firestore, 'events', id);
+            await setDoc(eventRef, event, { merge: true });  // Use setDoc with merge option
+            console.log(`Event with ID ${id} updated or created successfully in Firestore.`);
+        }
+        else{
+            const eventsCollectionRef = collection(firestore, 'events');
+            const docRef = await addDoc(eventsCollectionRef, event);  // Use addDoc to add a new document
+            console.log(`New event created with ID ${docRef.id} in Firestore.`);
+        }
+        return true;
+        
+    } catch (error: any) {
+        console.error(`Error updating or creating event: `, error);
+        return false;
+    }
+};

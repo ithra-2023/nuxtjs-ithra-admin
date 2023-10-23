@@ -24,7 +24,7 @@ export const saveUserInFirestore = async (user: IUser): Promise<boolean> => {
     try {
         const userRef = doc(firestore, 'users', user.uid);
         console.log('useFirestore.ts', 'Saving user:', user)
-        await setDoc(userRef, {
+        const result = await setDoc(userRef, {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName,
@@ -34,6 +34,7 @@ export const saveUserInFirestore = async (user: IUser): Promise<boolean> => {
             creationTime: user.metadata.creationTime,
             lastSignInTime: user.metadata.lastSignInTime,
         });
+        console.log('useFirestore.ts', 'User saved:', result);
         return true;
     } catch (error: any) {
         console.error('useFirestore.ts', 'Error saving user:', error);

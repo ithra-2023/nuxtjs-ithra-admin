@@ -1,30 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    pages: true,
-    ssr: false, // default behavior
-    typescript: { shim: false },
-    
+	pages: true,
+	ssr: false, // default behavior
+	typescript: { shim: false },
 	devtools: { enabled: false },
-	modules: [
-        '@pinia/nuxt',
-        '@pinia-plugin-persistedstate/nuxt',
-        '@nuxt/ui',
-    ],
-    pinia: {},
-    colorMode: {
-        preference: 'light'
-    },
-    
-    piniaPersistedstate: {
+	modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@nuxt/ui'],
+	ui: {
+		icons: ['heroicons', 'simple-icons'],
+	},
+	pinia: {},
+	colorMode: {
+		preference: 'light',
+	},
+	piniaPersistedstate: {
 		storage: 'localStorage',
 		debug: true,
 	},
-    css: ['~/assets/css/main.scss'],
-    imports: { dirs: ['stores'] },
-    devServer: {
+	css: ['~/assets/css/main.scss'],
+	imports: { dirs: ['stores'] },
+	devServer: {
 		port: 5555,
 	},
-    runtimeConfig: {
+	runtimeConfig: {
 		public: {
 			GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
 			GOOGLE_AUTH_DOMAIN: process.env.GOOGLE_AUTH_DOMAIN,
@@ -36,8 +33,7 @@ export default defineNuxtConfig({
 			NUXT_PUBLIC_GTAG_ID: process.env.NUXT_PUBLIC_GTAG_ID,
 		},
 	},
-    tailwindcss: {
+	tailwindcss: {
 		viewer: false,
 	},
-
 });

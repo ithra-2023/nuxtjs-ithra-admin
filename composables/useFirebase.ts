@@ -1,4 +1,5 @@
-import { FirebaseOptions, initializeApp, getApps, FirebaseApp } from 'firebase/app';
+import type {FirebaseOptions, FirebaseApp} from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 
 export const useFirebase = () => {
 	const { $config } = useNuxtApp();
@@ -15,6 +16,7 @@ export const useFirebase = () => {
 
 	// Initialize Firebase if it hasn't been already
 	let firebaseApp: FirebaseApp;
+    
 	if (getApps().length === 0) {
 		firebaseApp = initializeApp(firebaseConfig);
 	} else {
