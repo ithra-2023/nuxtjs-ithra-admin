@@ -13,7 +13,6 @@ env:
   GOOGLE_APP_ID: ${{ secrets.GOOGLE_APP_ID }}
   GOOGLE_MEASUREMENT_ID: ${{ secrets.GOOGLE_MEASUREMENT_ID }}
   NUXT_PUBLIC_GTAG_ID: ${{ secrets.NUXT_PUBLIC_GTAG_ID }}
-  NODE_ENV: production
 
 jobs:
   build:
@@ -51,7 +50,6 @@ jobs:
       - run: pnpm  build
         env:
           NITRO_PRESET: github_pages
-          NODE_ENV: production
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
