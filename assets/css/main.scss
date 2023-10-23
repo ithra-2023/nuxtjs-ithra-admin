@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 html, body, #__nuxt{
-    height:100%;
+    height:auto;
+    min-height:100vh;
 }

@@ -27,6 +27,7 @@
   "dependencies": {
     "@nuxt/ui": "^2.9.0",
     "@pinia/nuxt": "^0.5.1",
+    "alasql": "^4.1.10",
     "firebase": "^10.5.0",
     "flowbite": "^1.8.1",
     "pinia": "^2.1.7",

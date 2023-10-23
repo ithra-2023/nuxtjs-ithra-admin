@@ -1,5 +1,5 @@
-import { collection, getDocs, doc, setDoc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
-import { IGetEvents } from '~/types';
+import { collection, getDocs, doc, setDoc, updateDoc, arrayUnion, getDoc, deleteDoc } from 'firebase/firestore';
+import type { IGetEvents } from '@/types';
 
 export const getEvents = async (): Promise<IGetEvents> => {
 	const { firestore } = useFirestore();
@@ -88,3 +88,17 @@ export const getTopReviewsComments = (reviews: IReview[], count: number) => {
     console.log('useEvents.ts', 'topReviews', topReviews);
     return topReviews;
 };
+
+export const useDeleteEvent = async (id: string): Promise<boolean> => {
+    const { firestore } = useFirestore();
+
+    try {
+        console.log('useFirestore.ts', 'Deleting event:', id);
+        const eventRef = doc(firestore, 'events', id);
+        await deleteDoc(eventRef);
+        return true;
+    } catch (error: any) {
+        console.error('useFirestore.ts', 'Error deleting event:', error);
+        return false;
+    }
+}

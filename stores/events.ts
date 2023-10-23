@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { getDistance } from '@/utils/helpers';
-import { deleteEvent } from '~/composables/useFirestore';
+import { useDeleteEvent } from '~/composables/useEvents';
 
 export const useEventsStore = defineStore('EVENTS_STORE', {
 	state: () => ({
@@ -24,12 +24,12 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			}
 		},
 
-        async deleteEvent(id: string) {
+        async deleteEvent(id: string): Promise<void> {
             try {
                 console.log('stores/events.ts', '📪 Deleting event from firebase');
 
                 // delete event from firebase
-                await deleteEvent(id);
+                await useDeleteEvent(id);
 
                 // delete event from store
                 this.removeEvent(id);

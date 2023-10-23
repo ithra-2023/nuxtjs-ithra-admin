@@ -55,16 +55,3 @@ export const getOwners = async (): Promise<any> => {
     return result;
 }
 
-export const deleteEvent = async (id: string): Promise<boolean> => {
-    const { firestore } = useFirestore();
-
-    try {
-        console.log('useFirestore.ts', 'Deleting event:', id);
-        const eventRef = doc(firestore, 'events', id);
-        await deleteDoc(eventRef);
-        return true;
-    } catch (error: any) {
-        console.error('useFirestore.ts', 'Error deleting event:', error);
-        return false;
-    }
-}
