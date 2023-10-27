@@ -4,8 +4,6 @@ import { sleep } from '~/utils/helpers';
 	const isOpen = ref(false);
     const file = ref<File | undefined>(undefined);
 
-    
-
     const submitUpload = async (file:any) =>{
         const { uploadExcel } = useExcel();
         isLoading.value = true;
@@ -59,11 +57,10 @@ import { sleep } from '~/utils/helpers';
                     <div v-else class="pt-5 pb-6">
                         <div>{{ file?.name }}</div>
                         <UButton color="red" @click="file = undefined">Clear</UButton>
-                        
-
                     </div>
 
-                    <input  @change="selectedFile" id="dropzone-file" type="file" class="hidden" />
+
+                    <input @change="selectedFile" id="dropzone-file" type="file" class="hidden" />
 				</div>
 
 				<template v-if="file" #footer>
