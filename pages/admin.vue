@@ -4,14 +4,15 @@
 	const selected = ref<IEvent[]>([]);
 	const eventsStore = useEventsStore();
 	const events = computed(() => eventsStore.events);
-    const columns = [
-		{ key: 'title', label: 'title', sortable: true, class:'w-30 max-w-xs' },
-		{ key: 'category', label: 'category', sortable: true, class:'w-15 max-w-xs' },
-		{ key: 'city', label: 'city', sortable: true, class:'w-15 max-w-xs' },
-		{ key: 'entity', label: 'entity', sortable: true, class:'w-30 max-w-xs' },
-        { key: 'start_time', label: 'start_time', sortable: true, class:'w-10 max-w-xs' },
-        { key: 'end_time', label: 'end_time', sortable: true, class:'w-10 max-w-xs' },
-		{ key: 'language', label: 'language', sortable: true, class:'w-20 max-w-xs' },
+
+	const columns = [
+		{ key: 'title', label: 'title', sortable: true, class: 'w-30 max-w-xs' },
+		{ key: 'category', label: 'category', sortable: true, class: 'w-15 max-w-xs' },
+		{ key: 'city', label: 'city', sortable: true, class: 'w-15 max-w-xs' },
+		{ key: 'entity', label: 'entity', sortable: true, class: 'w-30 max-w-xs' },
+		{ key: 'start_time', label: 'start_time', sortable: true, class: 'w-10 max-w-xs' },
+		{ key: 'end_time', label: 'end_time', sortable: true, class: 'w-10 max-w-xs' },
+		{ key: 'language', label: 'language', sortable: true, class: 'w-20 max-w-xs' },
 	];
 
 	async function downloadXlsx() {
@@ -52,7 +53,7 @@
 		isLoading.value = false;
 	};
 
-    definePageMeta({
+	definePageMeta({
 		middleware: [
 			async function (to, from) {
 				const { user } = useUserStore();
@@ -67,7 +68,6 @@
 		if (val.length > 0) console.log(val[0].id);
 	});
 
-    const eventModalShow = ref(true);
 
 
 </script>
@@ -99,7 +99,7 @@
 				</div>
 			</UContainer>
 		</section>
-        <EventModal :show="eventModalShow" />
+
 		<NavsFooter />
 	</div>
 </template>

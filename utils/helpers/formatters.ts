@@ -12,6 +12,17 @@ export const formatDate = (timestamp: Timestamp) => {
 	return new Intl.DateTimeFormat('ar-SA', options).format(date);
 };
 
+
+// formats date to m/d/yyyy
+export const formatDateToEdit = (timestamp: Timestamp) => {
+    console.log(timestamp);
+    const date: Date = new Date(timestamp.seconds * 1000);
+    // return the date formatted as m/d/yyyy
+    console.log(date);
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    
+}
+
 export function formatDistance(distanceInMeters: number): string {
 	const distanceInKilos = distanceInMeters / 1000;
 	return `${distanceInKilos.toFixed(2)} كم`;
