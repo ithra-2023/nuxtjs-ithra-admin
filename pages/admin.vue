@@ -5,11 +5,13 @@
 	const eventsStore = useEventsStore();
 	const events = computed(() => eventsStore.events);
     const columns = [
-		{ key: 'title', label: 'title', sortable: true },
-		{ key: 'category', label: 'category', sortable: true },
-		{ key: 'city', label: 'city', sortable: true },
-		{ key: 'entity', label: 'entity', sortable: true },
-		{ key: 'language', label: 'language', sortable: true },
+		{ key: 'title', label: 'title', sortable: true, class:'w-30 max-w-xs' },
+		{ key: 'category', label: 'category', sortable: true, class:'w-15 max-w-xs' },
+		{ key: 'city', label: 'city', sortable: true, class:'w-15 max-w-xs' },
+		{ key: 'entity', label: 'entity', sortable: true, class:'w-30 max-w-xs' },
+        { key: 'start_time', label: 'start_time', sortable: true, class:'w-10 max-w-xs' },
+        { key: 'end_time', label: 'end_time', sortable: true, class:'w-10 max-w-xs' },
+		{ key: 'language', label: 'language', sortable: true, class:'w-20 max-w-xs' },
 	];
 
 	async function downloadXlsx() {
@@ -64,15 +66,19 @@
 	watch(selected, (val: IEvent[]) => {
 		if (val.length > 0) console.log(val[0].id);
 	});
+
+    const eventModalShow = ref(true);
+
+
 </script>
 <template>
 	<div class="min-h-screen flex flex-col h-screen">
 		<NavsHeader />
 		<section class="py-4 flex-1 overflow-hidden">
 			<UContainer class="h-full">
-				<div class="grid grid-cols-5 gap-4 h-full">
+				<div class="grid grid-cols-9 gap-4 h-full">
 					<NavsSide class="text-white" />
-					<div class="main-content col-span-4 overflow-hidden h-full">
+					<div class="main-content col-span-8 overflow-hidden h-full">
 						<div class="p-4 w-full space-y-4 flex flex-col bg-white text-slate-500 rounded h-full">
 							<div class="flex justify-end space-x-2">
 								<UButton :loading="isLoading" @click="refreshEvents" variant="outline" color="gray">Refresh</UButton><UploadModal />
@@ -86,13 +92,14 @@
 								<UButton @click="downloadXlsx" color="green">Download</UButton>
 							</div>
 							<div class="flex-1 w-full overflow-auto">
-								<UTable class="text-sm" v-model="selected" :columns="columns" :rows="filteredRows" />
+								<UTable class="text-sm max-w-full" v-model="selected" :columns="columns" :rows="filteredRows" />
 							</div>
 						</div>
 					</div>
 				</div>
 			</UContainer>
 		</section>
+        <EventModal :show="eventModalShow" />
 		<NavsFooter />
 	</div>
 </template>
