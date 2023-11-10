@@ -11,9 +11,9 @@
 <template>
 	<div class="flex h-full flex-col justify-between">
 		<ul class="space-y-1">
-			<li><NuxtLink to="/"        class="block rounded-lg px-4 py-2 text-sm font-medium" :class="(routeName == 'admin') ? 'bg-gray-100 text-gray-700':''">Events</NuxtLink></li>
-			<li><NuxtLink to="/reviews" class="block rounded-lg px-4 py-2 text-sm font-medium"  :class="(routeName == 'reviews') ? 'bg-gray-100 text-gray-700':''">Reviews</NuxtLink></li>
-            <li><NuxtLink to="" class="block rounded-lg px-4 py-2 text-sm font-medium"  :class="(routeName == 'settings') ? 'bg-gray-100 text-gray-700':''">General Settings</NuxtLink></li>
+			<li><NuxtLink to="/admin"        class="block rounded-lg px-4 py-2 text-sm font-medium" active-class="bg-gray-100 text-gray-700">Events</NuxtLink></li>
+			<li><NuxtLink to="/reviews" class="block rounded-lg px-4 py-2 text-sm font-medium" active-class="bg-gray-100 text-gray-700">Reviews</NuxtLink></li>
+            <li><NuxtLink to="" class="block rounded-lg px-4 py-2 text-sm font-medium" active-class="bg-gray-100 text-gray-700">General Settings</NuxtLink></li>
 
 		
 		</ul>
